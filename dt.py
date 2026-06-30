@@ -1,21 +1,3 @@
-"""
-Analizador de ojo externo: detección de enrojecimiento/venas rojas en la esclerótica.
-
-IMPORTANTE:
-- Este programa NO diagnostica diabetes.
-- Analiza una fotografía externa del ojo y calcula un índice de enrojecimiento superficial.
-- Para retinopatía diabética se necesitan imágenes de fondo de ojo/retinografía, no una foto externa.
-
-Uso:
-    python analizador_ojo_externo_interfaz.py
-
-Instalación:
-    pip install opencv-python numpy pillow
-
-Opcional para HEIC/HEIF:
-    pip install pillow-heif
-"""
-
 import os
 import csv
 import platform
