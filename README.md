@@ -43,14 +43,6 @@ Avance estimado: 50%.
 .
 ├── README.md
 ├── requirements.txt
-├── src/
-│   ├── analizador_ojo_externo_interfaz.py
-│   ├── detector_microaneurismas_interfaz.py
-│   └── detector_microaneurismas_cli.py
-├── docs/
-│   └── informe_avance_50.pdf
-├── data/
-│   └── ejemplos/
 └── resultados/
 ```
 
@@ -87,14 +79,6 @@ python src/detector_microaneurismas_interfaz.py
 ## Requisitos de entrada
 
 Para el análisis de retinopatía diabética, la entrada correcta debe ser una imagen de fondo de ojo o retinografía. Una foto externa del ojo no muestra la retina y, por tanto, no permite evaluar microaneurismas retinales.
-
-## Enlace al informe
-
-El informe de avance se encuentra en:
-
-```text
-docs/informe_avance_50.pdf
-```
 
 ## Licencia
 
