@@ -11,8 +11,8 @@ El objetivo principal del proyecto es desarrollar un sistema de apoyo para anali
 ## Integrantes
 
 - José Benjamín Mendoza Delgado
-- [Agregar nombre de integrante]
-- [Agregar nombre de integrante]
+- Luiggi Smith Saba Martínez
+- Eder Escobar Gómez
 
 ## Estado del avance
 
