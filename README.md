@@ -97,8 +97,8 @@ Analizador_Ocular_Modular/
 │   ├── HoughTransform.ipynb
 │   └── RegionSegmentation.ipynb
 │
-└── docs/
-    └── capturas/
+└── resultados_ojo_externo/
+
 ```
 
 ---
