@@ -1,85 +1,81 @@
-# Detección de Retinopatía Diabética - Avance 50%
+# Analizador Ocular Modular con Procesamiento Digital de Imágenes
 
 ## Descripción general
 
-Este repositorio contiene el avance del proyecto de Procesamiento Digital de Señales / Imágenes orientado al análisis ocular mediante Python y OpenCV.
+Este proyecto consiste en el desarrollo de un prototipo académico para el análisis orientativo de imágenes oculares mediante técnicas clásicas de procesamiento digital de imágenes. El sistema permite analizar fotografías externas del ojo y retinografías, generando máscaras, overlays visuales, reportes en texto y archivos CSV con resultados cuantitativos.
 
-El objetivo principal del proyecto es desarrollar un sistema de apoyo para analizar imágenes de fondo de ojo y detectar candidatos a microaneurismas asociados a retinopatía diabética. Como módulo complementario de avance, también se implementó una interfaz para analizar fotografías externas del ojo y cuantificar enrojecimiento visible en la esclerótica.
+El software fue desarrollado en Python y cuenta con una interfaz gráfica que permite cargar imágenes, seleccionar regiones de interés y ejecutar distintos módulos de análisis ocular.
 
-> Advertencia: el sistema no diagnostica diabetes ni reemplaza evaluación médica. La diabetes se confirma mediante pruebas clínicas de glucosa/HbA1c y la retinopatía diabética se evalúa correctamente con imágenes de fondo de ojo o retinografía.
+## Problema que aborda
 
-## Integrantes
+El análisis visual del ojo puede proporcionar información útil sobre posibles alteraciones externas como enrojecimiento, opacidad visible, carnosidad, inflamación palpebral o lesiones en párpados. Sin embargo, las imágenes capturadas con cámaras comunes presentan variaciones de iluminación, enfoque, distancia, sombras y color de piel.
 
-- José Benjamín Mendoza Delgado
-- Luiggi Smith Saba Martínez
-- Eder Escobar Gómez
+Por ello, se propone un sistema asistido que permita delimitar correctamente las regiones anatómicas del ojo y aplicar técnicas clásicas de procesamiento digital de imágenes para obtener resultados interpretables.
 
-## Estado del avance
+## Solución propuesta
 
-Avance estimado: 50%.
+La solución propuesta es una aplicación modular en Python que integra:
 
-### Implementado
+- Carga de imágenes en distintos formatos.
+- Preprocesamiento y normalización.
+- Segmentación anatómica del ojo.
+- Detección de iris, pupila, esclerótica y bandas palpebrales.
+- Análisis orientativo de signos visibles.
+- Módulo independiente para retinografía.
+- Generación de máscaras, overlays y archivos CSV.
 
-- Carga robusta de imágenes en formatos comunes: JPG, PNG, BMP, TIFF, WEBP, JP2 y HEIC/HEIF si se instala `pillow-heif`.
-- Interfaz gráfica en Tkinter para seleccionar la imagen desde el explorador.
-- Preprocesamiento con OpenCV y NumPy.
-- Segmentación aproximada de esclerótica en foto externa del ojo.
-- Detección de zonas rojizas o venas visibles mediante espacio HSV y dominancia del canal rojo.
-- Cálculo de índice de enrojecimiento.
-- Exportación de resultados visuales y CSV.
-- Módulo base para análisis de retinografías con canal verde, CLAHE, operaciones morfológicas, umbralización y filtrado por área/circularidad.
+El sistema no realiza diagnóstico médico. Los resultados son orientativos y deben ser interpretados únicamente con fines académicos.
 
-### Pendiente
+## Objetivo general
 
-- Validar con un conjunto de retinografías reales.
-- Separar claramente el módulo de retinografía y el módulo de ojo externo.
-- Añadir métricas de validación: sensibilidad, precisión, falsos positivos y comparación con anotaciones.
-- Mejorar la exclusión de disco óptico y vasos sanguíneos en retinografía.
-- Documentar resultados finales y capturas del sistema.
+Desarrollar un prototipo académico de análisis ocular mediante procesamiento digital de imágenes, capaz de segmentar regiones anatómicas y detectar signos visuales orientativos en fotografías oculares externas y retinografías.
 
-## Estructura del repositorio
+## Objetivos específicos
+
+- Implementar una interfaz gráfica para cargar y analizar imágenes oculares.
+- Aplicar técnicas clásicas como Otsu, Canny, Hough, morfología matemática y componentes conectados.
+- Segmentar iris, pupila, esclerótica y bandas palpebrales.
+- Analizar signos orientativos asociados a conjuntivitis, catarata visible, pterigión, blefaritis y orzuelo.
+- Implementar un módulo separado para retinografía y posibles candidatos a microaneurismas.
+- Generar resultados visuales mediante overlays y resultados cuantitativos mediante CSV.
+- Mantener una arquitectura modular y reutilizable.
+
+## Arquitectura del software
+
+El proyecto se organiza de forma modular:
 
 ```text
-.
-├── README.md
+Analizador_Ocular_Modular/
+│
+├── main.py
+├── gui_app.py
+├── config.py
 ├── requirements.txt
-└── resultados/
-```
-
-## Instalación
-
-```bash
-python -m venv venv
-venv\Scripts\activate
-pip install -r requirements.txt
-```
-
-En Linux/Mac:
-
-```bash
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-```
-
-## Ejecución
-
-### Interfaz de ojo externo
-
-```bash
-python src/analizador_ojo_externo_interfaz.py
-```
-
-### Detector de microaneurismas en retinografía
-
-```bash
-python src/detector_microaneurismas_interfaz.py
-```
-
-## Requisitos de entrada
-
-Para el análisis de retinopatía diabética, la entrada correcta debe ser una imagen de fondo de ojo o retinografía. Una foto externa del ojo no muestra la retina y, por tanto, no permite evaluar microaneurismas retinales.
-
-## Licencia
-
-Proyecto académico para fines educativos.
+├── run.bat
+├── README.md
+│
+├── core/
+│   ├── image_io.py
+│   ├── preprocess.py
+│   ├── iris_pupil_detection.py
+│   ├── classical_methods.py
+│   ├── quality_control.py
+│   └── sclera_segmentation.py
+│
+├── diseases/
+│   ├── conjunctivitis.py
+│   ├── cataract.py
+│   ├── pterygium.py
+│   ├── blepharitis.py
+│   ├── stye.py
+│   └── diabetic_retinopathy_fundus.py
+│
+├── utils/
+│   ├── advanced_analysis.py
+│   ├── drawing.py
+│   └── helpers.py
+│
+└── notebooks/
+    ├── EdgeDetection.ipynb
+    ├── HoughTransform.ipynb
+    └── RegionSegmentation.ipynb
