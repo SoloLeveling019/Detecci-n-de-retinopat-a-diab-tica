@@ -1,0 +1,1 @@
+# Inicializador del módulo diseases
