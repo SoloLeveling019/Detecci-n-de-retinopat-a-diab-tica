@@ -1,65 +1,47 @@
-# Analizador Ocular Modular con Procesamiento Digital de Imágenes
-
-**Prototipo académico para el análisis orientativo de signos oculares externos y retinográficos.**
-
----
+# Detección de retinopatía diabética
 
 ## Descripción general
 
-Este proyecto consiste en el desarrollo de un prototipo académico para el análisis orientativo de imágenes oculares mediante técnicas clásicas de procesamiento digital de imágenes. El sistema permite analizar fotografías externas del ojo y retinografías, generando máscaras binarias, overlays visuales, reportes en texto y archivos CSV con resultados cuantitativos.
+Este proyecto consiste en el desarrollo de un prototipo académico para la detección orientativa de signos asociados a retinopatía diabética mediante procesamiento digital de imágenes. El sistema trabaja principalmente con imágenes de retinografía o fondo de ojo, donde busca posibles candidatos a microaneurismas y regiones oscuras pequeñas mediante técnicas clásicas de procesamiento de imágenes.
 
-El software fue desarrollado en Python y cuenta con una interfaz gráfica que permite cargar imágenes, seleccionar regiones de interés y ejecutar distintos módulos de análisis ocular.
+Además del módulo principal de retinografía, el software incluye módulos complementarios para análisis ocular externo, como enrojecimiento ocular, catarata visible, pterigión o carnosidad, blefaritis y orzuelo. Estos módulos se mantienen como apoyo académico para demostrar segmentación anatómica, máscaras binarias, overlays visuales y generación de reportes.
 
----
+El sistema no realiza diagnóstico médico. Los resultados son orientativos y deben interpretarse únicamente como evidencia académica del procesamiento aplicado.
 
 ## Problema que aborda
 
-El análisis visual del ojo puede proporcionar información útil sobre posibles alteraciones externas como enrojecimiento, opacidad visible, carnosidad, inflamación palpebral o lesiones en párpados. Sin embargo, las imágenes capturadas con cámaras comunes presentan variaciones importantes de iluminación, enfoque, distancia, sombras, resolución y color de piel.
+La retinopatía diabética es una alteración ocular que puede presentar signos visibles en imágenes de fondo de ojo, como microaneurismas, hemorragias, alteraciones vasculares y otras lesiones retinianas. El análisis de estas imágenes requiere identificar regiones pequeñas, diferenciar estructuras anatómicas como el disco óptico y trabajar con imágenes que pueden variar en iluminación, contraste, resolución y calidad.
 
-Por ello, se propone un sistema asistido que permite delimitar correctamente las regiones anatómicas del ojo y aplicar técnicas clásicas de procesamiento digital de imágenes para obtener resultados interpretables.
-
----
+Desde el enfoque del curso de Procesamiento Digital de Señales II, el problema se aborda como una tarea de procesamiento digital de imágenes: cargar una imagen, mejorar su contraste, segmentar regiones relevantes, excluir zonas que pueden generar falsos positivos y producir resultados visuales y cuantitativos.
 
 ## Solución propuesta
 
-La solución propuesta es una aplicación modular en Python que integra:
+La solución propuesta es una aplicación de escritorio desarrollada en Python con interfaz gráfica. El sistema permite cargar imágenes oculares, ejecutar un módulo independiente de retinografía y generar salidas visuales como máscaras, overlays y archivos CSV.
 
-- Carga de imágenes en distintos formatos.
-- Preprocesamiento y normalización.
-- Segmentación anatómica del ojo.
-- Detección de iris, pupila, esclerótica y bandas palpebrales.
-- Análisis orientativo de signos visibles en fotografías externas del ojo.
-- Módulo independiente para retinografía o fondo de ojo.
-- Generación de máscaras binarias, overlays visuales y archivos CSV.
+El módulo de retinografía utiliza técnicas clásicas como canal verde, CLAHE, segmentación del campo de visión, exclusión del disco óptico, Black-Hat, Otsu, MSER, morfología matemática y análisis geométrico de regiones. De esta manera, el sistema busca posibles candidatos a microaneurismas sin utilizar redes neuronales entrenadas ni modelos de caja negra.
 
-El sistema no realiza diagnóstico médico. Los resultados son orientativos y deben ser interpretados únicamente con fines académicos.
-
----
+Los módulos complementarios de ojo externo utilizan selección guiada de la región ocular, marcado del iris, delimitación de abertura ocular, segmentación de esclerótica y análisis por máscaras.
 
 ## Objetivo general
 
-Desarrollar un prototipo académico de análisis ocular mediante procesamiento digital de imágenes, capaz de segmentar regiones anatómicas y detectar signos visuales orientativos en fotografías externas del ojo y retinografías.
-
----
+Desarrollar un prototipo académico de detección orientativa de signos asociados a retinopatía diabética mediante procesamiento digital de imágenes, generando máscaras, overlays visuales y reportes cuantitativos a partir de imágenes de fondo de ojo.
 
 ## Objetivos específicos
 
-- Implementar una interfaz gráfica para la carga y análisis de imágenes oculares.
-- Aplicar técnicas clásicas de procesamiento digital de imágenes para segmentar estructuras anatómicas.
-- Detectar iris, pupila, esclerótica, abertura ocular y bandas palpebrales.
-- Analizar signos orientativos asociados a enrojecimiento ocular, catarata visible, pterigión, blefaritis y orzuelo.
-- Implementar un módulo separado para retinografía y detección de posibles candidatos a microaneurismas.
-- Generar overlays visuales, máscaras binarias y archivos CSV para documentar los resultados.
-- Mantener una arquitectura modular, reutilizable y comprensible.
-
----
+- Implementar una interfaz gráfica para cargar y analizar imágenes oculares.
+- Procesar retinografías mediante técnicas clásicas de procesamiento digital de imágenes.
+- Segmentar el campo de visión retiniano y excluir el disco óptico antes de buscar candidatos.
+- Detectar posibles regiones oscuras pequeñas compatibles con candidatos a microaneurismas.
+- Generar máscaras binarias, overlays visuales y archivos CSV como evidencia del procesamiento.
+- Mantener una arquitectura modular organizada en varios archivos reutilizables.
+- Incluir módulos complementarios de análisis ocular externo para reforzar la aplicación de segmentación anatómica.
 
 ## Arquitectura del software
 
-El proyecto está organizado en varios archivos y carpetas, cada uno con una responsabilidad específica:
+El proyecto está organizado de manera modular para facilitar su comprensión, mantenimiento y reutilización.
 
 ```text
-Analizador_Ocular_Modular/
+Deteccion_Retinopatia_Diabetica/
 │
 ├── main.py
 ├── gui_app.py
@@ -92,142 +74,96 @@ Analizador_Ocular_Modular/
 │   ├── drawing.py
 │   └── helpers.py
 │
-├── notebooks/
-│   ├── EdgeDetection.ipynb
-│   ├── HoughTransform.ipynb
-│   └── RegionSegmentation.ipynb
-│
-└── resultados_ojo_externo/
-
+└── notebooks/
+    ├── EdgeDetection.ipynb
+    ├── HoughTransform.ipynb
+    └── RegionSegmentation.ipynb
 ```
 
----
+## Responsabilidad de archivos y carpetas
 
-## Descripción de carpetas y archivos principales
-
-### `main.py`
-
-Archivo principal de ejecución. Inicializa la aplicación gráfica y carga la clase principal `ModularEyeApp`.
-
-### `gui_app.py`
-
-Contiene la interfaz gráfica del sistema, los botones de análisis, selección de imágenes, selección manual de regiones, ejecución del pipeline y generación de resultados.
-
-### `config.py`
-
-Define parámetros globales del sistema, como tamaño máximo de procesamiento, extensiones soportadas y directorio base de resultados.
-
-### `core/`
-
-Contiene los módulos de procesamiento base:
-
-- `image_io.py`: carga imágenes en distintos formatos y soporta rutas con espacios o tildes.
-- `preprocess.py`: normalización, conversión de canales y redimensionamiento.
-- `classical_methods.py`: métodos clásicos como Canny, Otsu, Hough, MSER y limpieza de máscaras.
-- `iris_pupil_detection.py`: detección aproximada de pupila e iris.
-- `quality_control.py`: validaciones de calidad de imagen.
-- `sclera_segmentation.py`: segmentación anatómica de esclerótica, iris, pupila, abertura ocular y bandas palpebrales.
-
-### `diseases/`
-
-Contiene los módulos de análisis orientativo:
-
-- `conjunctivitis.py`: analiza porcentaje y distribución de enrojecimiento.
-- `cataract.py`: analiza opacidad visible en la zona pupilar.
-- `pterygium.py`: analiza posibles regiones compatibles con pterigión o carnosidad.
-- `blepharitis.py`: analiza signos visibles en bandas palpebrales.
-- `stye.py`: analiza posibles lesiones compatibles con orzuelo.
-- `diabetic_retinopathy_fundus.py`: analiza retinografías y posibles candidatos a microaneurismas.
-
-### `utils/`
-
-Contiene funciones auxiliares:
-
-- `advanced_analysis.py`: relleno de huecos, filtrado geométrico y gráficos.
-- `drawing.py`: generación de overlays visuales.
-- `helpers.py`: guardado robusto de imágenes.
-
-### `notebooks/`
-
-Contiene notebooks de apoyo utilizados durante el desarrollo del proyecto. Documentan pruebas experimentales relacionadas con técnicas clásicas de procesamiento digital de imágenes:
-
-- Detección de bordes.
-- Transformada de Hough.
-- Segmentación de regiones.
-
-Estos notebooks son complementarios y no son necesarios para ejecutar la aplicación principal.
-
----
+| Archivo / carpeta | Responsabilidad principal |
+|---|---|
+| `main.py` | Punto de entrada de la aplicación. Inicializa la interfaz gráfica. |
+| `gui_app.py` | Controla la interfaz, carga de imágenes, botones, flujos de análisis y visualización de resultados. |
+| `config.py` | Define parámetros generales, extensiones soportadas, dimensiones de procesamiento y rutas de salida. |
+| `core/` | Contiene funciones de carga, preprocesamiento, control de calidad, detección de iris/pupila y segmentación anatómica. |
+| `diseases/` | Contiene los módulos de análisis: retinografía, conjuntivitis, catarata visible, pterigión, blefaritis y orzuelo. |
+| `utils/` | Incluye funciones auxiliares para guardado, overlays, gráficos y análisis avanzado de máscaras. |
+| `notebooks/` | Contiene cuadernos experimentales de apoyo para Canny, Hough y segmentación de regiones. No son necesarios para ejecutar la aplicación principal. |
 
 ## Funcionalidades principales
 
-### 1. Modo guiado / corrección manual
+### 1. Análisis de fondo de ojo / retinografía
 
-Es el modo recomendado para la entrega final. Permite seleccionar manualmente la región ocular, marcar el iris y delimitar la abertura visible del ojo. Esto mejora la estabilidad anatómica de las máscaras.
+Es el módulo principal del proyecto. Procesa imágenes de retinografía para buscar posibles candidatos a microaneurismas o regiones oscuras pequeñas.
 
-### 2. Análisis automático completo
+Etapas principales:
 
-Ejecuta una detección automática de la región ocular y aplica los módulos de análisis. Se considera una mejora adicional, aunque puede ser sensible a iluminación, enfoque, sombras o encuadre.
+- Carga de imagen.
+- Extracción del canal verde.
+- Realce de contraste mediante CLAHE.
+- Segmentación del campo de visión retiniano.
+- Detección y exclusión del disco óptico.
+- Aplicación de Black-Hat, Otsu y MSER.
+- Filtrado geométrico de candidatos.
+- Generación de overlay y CSV.
 
-### 3. Análisis de fondo de ojo / retinografía
+### 2. Modo guiado / corrección manual para ojo externo
 
-Módulo independiente para analizar retinografías. Busca posibles candidatos a microaneurismas mediante procesamiento del canal verde, segmentación del campo de visión, exclusión del disco óptico, Black-Hat, Otsu, MSER y análisis de regiones.
+Permite seleccionar manualmente la región ocular, marcar el iris y delimitar la abertura visible del ojo. Este flujo ayuda a construir máscaras anatómicas más estables para los módulos complementarios.
 
----
+En este modo:
 
-## Señales analizadas
+- Se selecciona la región ocular mediante recorte.
+- Se marca el iris con dos clics: centro y borde.
+- Se delimita la abertura ocular con un polígono de 6 a 12 clics.
+- Se generan máscaras de iris, pupila, esclerótica y párpados.
 
-El sistema analiza signos visuales orientativos asociados a:
+### 3. Análisis automático completo
 
-- Conjuntivitis / enrojecimiento ocular.
+Ejecuta un flujo automático de detección y segmentación. Se mantiene como mejora adicional, aunque puede ser sensible a iluminación, reflejos, sombras o encuadres difíciles.
+
+### 4. Módulos complementarios de ojo externo
+
+El sistema también incluye módulos orientativos para:
+
+- Enrojecimiento ocular / conjuntivitis.
 - Catarata visible.
 - Pterigión / carnosidad.
 - Blefaritis.
 - Orzuelo.
-- Posibles candidatos a microaneurismas en retinografía.
 
----
+Estos módulos no son diagnósticos. Se usan para demostrar segmentación anatómica, análisis por color, morfología matemática y generación de resultados visuales.
 
 ## Técnicas utilizadas
 
-El sistema utiliza técnicas clásicas de procesamiento digital de imágenes, entre ellas:
-
 - Normalización de imagen.
-- Conversión de espacios de color.
-- Segmentación en HSV.
+- Conversión de espacios de color BGR, HSV y escala de grises.
+- Canal verde para retinografía.
+- CLAHE para realce de contraste.
 - Umbralización de Otsu.
 - Detección de bordes Canny.
 - Transformada de Hough.
 - Morfología matemática.
-- Componentes conectados.
-- Análisis geométrico de regiones.
-- CLAHE.
 - Black-Hat.
 - MSER.
-- Generación de máscaras binarias.
-- Overlays visuales.
+- Componentes conectados.
+- Análisis geométrico de regiones.
+- Máscaras binarias y overlays visuales.
 
----
+## Dataset y datos de prueba
 
-## Dataset
+No se construyó un dataset clínico propio. Para las pruebas funcionales del sistema se utilizaron imágenes públicas obtenidas de internet, únicamente con fines académicos y de validación visual del prototipo.
 
-No se construyó un dataset clínico propio. Para las pruebas funcionales se utilizaron imágenes locales de validación.
+Estas imágenes permitieron comprobar la carga de archivos, la segmentación anatómica, la generación de máscaras, overlays y reportes CSV. No se utilizaron para entrenamiento de modelos de inteligencia artificial ni para validación clínica.
 
-Como referencia académica para el módulo de retinografía se considera el dataset público **mBRSET**, publicado en *Scientific Data*. Este dataset contiene 5,164 imágenes de fondo de ojo de 1,291 pacientes capturadas con cámaras retinianas portátiles en escenarios reales.
+Como referencia pública para el módulo de retinografía se considera mBRSET, un dataset de retinografías capturadas con cámaras portátiles y disponible en PhysioNet.
 
 Dataset público mBRSET:
+https://physionet.org/content/mbrset/1.0/
 
-```text
-https://www.physionet.org/content/mbrset/1.0/
-```
-
-Repositorio asociado:
-
-```text
-https://github.com/luisnakayama/mBRSET
-```
-
----
+Las imágenes públicas usadas para las pruebas no se incluyen en el repositorio por consideraciones de licencia y uso responsable. El usuario puede ejecutar el sistema con imágenes propias o imágenes públicas autorizadas.
 
 ## Requisitos del sistema
 
@@ -250,11 +186,9 @@ Visual Studio Code
 Terminal de Windows / PowerShell
 ```
 
----
-
 ## Dependencias
 
-Las dependencias principales se encuentran en `requirements.txt`:
+Las dependencias principales están indicadas en `requirements.txt`:
 
 ```text
 opencv-python>=4.7.0
@@ -266,18 +200,21 @@ scipy
 matplotlib
 ```
 
----
-
 ## Instalación
 
 Clonar el repositorio:
 
 ```bash
-git clone URL_DEL_REPOSITORIO
-cd Analizador_Ocular_Modular
+git clone [PEGAR_AQUI_EL_ENLACE_DEL_REPOSITORIO]
 ```
 
-Crear un entorno virtual opcional:
+Entrar a la carpeta del proyecto:
+
+```bash
+cd Deteccion_Retinopatia_Diabetica
+```
+
+Crear entorno virtual opcional:
 
 ```bash
 python -m venv venv
@@ -290,8 +227,6 @@ Instalar dependencias:
 pip install -r requirements.txt
 ```
 
----
-
 ## Ejecución
 
 Ejecutar desde terminal:
@@ -300,37 +235,21 @@ Ejecutar desde terminal:
 python main.py
 ```
 
-O ejecutar en Windows:
+O en Windows:
 
 ```bash
 run.bat
 ```
 
----
-
-## Uso básico
-
-1. Abrir el programa con `python main.py` o `run.bat`.
-2. Presionar **Seleccionar Imagen**.
-3. Cargar una fotografía del ojo o una retinografía.
-4. Para fotografía externa, usar preferentemente **Modo guiado / corrección manual**.
-5. Seleccionar el recorte del ojo.
-6. Marcar el centro y borde del iris.
-7. Marcar la abertura ocular visible.
-8. Revisar el overlay generado.
-9. Abrir la carpeta de resultados para revisar máscaras y CSV.
-
----
-
 ## Archivos generados
 
-Por cada análisis, el sistema genera una carpeta dentro de:
+Los resultados se almacenan en carpetas independientes dentro de:
 
 ```text
 resultados_ojo_externo/
 ```
 
-Resultados principales para ojo externo:
+Para análisis de ojo externo se pueden generar archivos como:
 
 ```text
 normalized_eye_crop.png
@@ -343,7 +262,7 @@ overlay_general_limpio.png
 resumen_general.csv
 ```
 
-Resultados principales para retinografía:
+Para retinografía se pueden generar archivos como:
 
 ```text
 fundus_preprocessed.png
@@ -354,60 +273,51 @@ overlay_retinopathy.png
 resumen_retinopatia.csv
 ```
 
----
-
-## Pruebas recomendadas
-
-Para validar el sistema se recomienda probar como mínimo:
-
-1. Ojo normal.
-2. Ojo rojo.
-3. Ojo con párpados visibles.
-4. Posible pterigión o carnosidad.
-5. Retinografía.
-
-Durante la validación visual se debe verificar:
-
-- Que la máscara de esclerótica no invada piel, cejas o fondo.
-- Que la máscara roja esté dentro de la esclerótica.
-- Que el iris y la pupila estén correctamente delimitados.
-- Que las bandas palpebrales se ubiquen cerca de los párpados.
-- Que el overlay general sea visualmente entendible.
-- Que el CSV se genere correctamente.
-
----
-
 ## Limitaciones
 
-- El sistema depende de la calidad de la imagen.
-- La iluminación, sombras, desenfoque o mala selección de ROI pueden afectar los resultados.
+- El sistema no realiza diagnóstico médico.
+- No confirma diabetes ni retinopatía diabética.
+- El módulo de retinografía solo marca posibles candidatos visuales.
+- La clasificación clínica completa requiere evaluación especializada.
+- La calidad de imagen, iluminación, enfoque y resolución afectan los resultados.
 - El modo automático puede fallar en imágenes difíciles.
-- El módulo de retinografía no clasifica clínicamente la retinopatía diabética completa.
-- El sistema no detecta glaucoma.
-- El sistema no confirma diabetes.
-- Los resultados son orientativos y no representan diagnóstico médico.
-- No reemplaza una evaluación oftalmológica.
-
----
+- Las imágenes públicas usadas para pruebas funcionales no constituyen un dataset clínico propio.
+- No se entrenaron redes neuronales ni modelos de aprendizaje profundo.
 
 ## Advertencia médica
 
-Este software es un prototipo académico. No confirma enfermedades, no diagnostica diabetes, retinopatía diabética, glaucoma ni otras patologías. Los resultados deben interpretarse únicamente como apoyo visual orientativo.
+Este software es un prototipo académico. Sus resultados son orientativos y no reemplazan una evaluación médica, oftalmológica o clínica. No debe utilizarse para tomar decisiones de salud.
 
----
+## Repositorio del proyecto
 
-## Estado del proyecto
+El código fuente del proyecto se encuentra disponible en GitHub.
 
-Versión académica final funcional, pendiente únicamente de validación visual final con imágenes de prueba antes de la exposición.
+Repositorio:
 
----
+```text
+[PEGAR AQUÍ EL ENLACE DEL REPOSITORIO]
+```
 
 ## Curso
 
 Procesamiento Digital de Señales II
 
----
+## Institución
 
-## Licencia
+Universidad Nacional de Piura  
+Facultad de Ciencias  
+Escuela Profesional de Ingeniería Electrónica y Telecomunicaciones
 
-Proyecto desarrollado con fines académicos.
+## Integrantes
+
+- Saba Martínez Luiggi Smith
+- Mendoza Delgado Jose Benjamin
+- Escobar Gomez Eder
+
+## Docente
+
+MAG. ING. Yonatan Aguirre
+
+## Estado del proyecto
+
+Versión académica final funcional para presentación, documentación y demostración mediante grabación de pantalla.
