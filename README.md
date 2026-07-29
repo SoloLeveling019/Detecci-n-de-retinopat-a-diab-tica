@@ -205,7 +205,7 @@ matplotlib
 Clonar el repositorio:
 
 ```bash
-git clone [PEGAR_AQUI_EL_ENLACE_DEL_REPOSITORIO]
+git clone https://github.com/SoloLeveling019/Detecci-n-de-retinopat-a-diab-tica.git
 ```
 
 Entrar a la carpeta del proyecto:
@@ -291,12 +291,6 @@ Este software es un prototipo académico. Sus resultados son orientativos y no r
 ## Repositorio del proyecto
 
 El código fuente del proyecto se encuentra disponible en GitHub.
-
-Repositorio:
-
-```text
-[PEGAR AQUÍ EL ENLACE DEL REPOSITORIO]
-```
 
 ## Curso
 
